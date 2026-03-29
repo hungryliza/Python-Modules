@@ -1,5 +1,5 @@
 def ft_count_harvest_helper(i, tot_days):
-    if (i == tot_days + 1):
+    if (i > tot_days):
         print("Harvest time!")
     else:
         print("Day", i)
