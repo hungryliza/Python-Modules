@@ -1,21 +1,21 @@
 class Plant:
-    def __init__(self, name, height, initage):
+    def __init__(self, name: str, height: float, initage: int) -> None:
         self.name = name
         self.height = height
         self.initialheight = height
         self.initage = initage
         self.stats = Plant.Stats(self.name)
 
-    def grow(self):
+    def grow(self) -> None:
         self.height += 8
         self.stats.set_nbr_grow()
 
-    def age(self):
+    def age(self) -> None:
         self.initage += 1
         self.stats.set_nbr_age()
 
     @staticmethod
-    def age_checker(year_age):
+    def age_checker(year_age: int) -> None:
         if year_age > 365:
             print(f"Is {year_age} days more than a year? -> True\n")
         else:
@@ -23,19 +23,20 @@ class Plant:
 
     @classmethod
     def anon_plants(cls):
-        return(cls("Unknown plant", 0.0, 0))
+        return (cls("Unknown plant", 0.0, 0))
 
-    def show(self):
-        print(f"{self.name}: {float(round(self.height))}cm, {self.initage} days old")
+    def show(self) -> None:
+        print(f"{self.name}: "
+              f"{float(round(self.height))}cm, {self.initage} days old")
         self.stats.set_nbr_show()
 
     class Stats:
-        def __init__(self, name):
+        def __init__(self, name: str) -> None:
             self._nbr_grow = 0
             self._nbr_age = 0
             self._nbr_show = 0
             self.name = name
-        
+
         def get_nbr_grow(self):
             return (self._nbr_grow)
 
@@ -56,9 +57,10 @@ class Plant:
 
         def display(self):
             print(f"[statistics for {self.name}]")
-            print(f"Stats: {self.get_nbr_grow()} grow, {self.get_nbr_age()} age, {self.get_nbr_show()} show")
+            print(f"Stats: {self.get_nbr_grow()} grow, "
+                  f"{self.get_nbr_age()} age, {self.get_nbr_show()} show")
 
-        
+
 class Flower(Plant):
     def __init__(self, name, height, age, color):
         super().__init__(name, height, age)
@@ -73,6 +75,7 @@ class Flower(Plant):
     def show(self):
         super().show()
         print(f" Color: {self.color}")
+
 
 class Seed(Flower):
     def __init__(self, name, height, age, color):
@@ -104,16 +107,18 @@ class Seed(Flower):
         super().show()
         print(f" Seeds: {self.get_bloom()}")
 
+
 class Tree(Plant):
     def __init__(self, name, height, age, trunk_diameter):
         super().__init__(name, height, age)
         self.stats = Tree.Treestats(self.name)
-        self.trunk_diameter =  trunk_diameter
+        self.trunk_diameter = trunk_diameter
 
     def produce_shade(self):
         print(f"[asking the {self.name} to produce shade]")
         print(f"Tree {self.name} now produces"
-              f" a shade of {self.height}cm long and {self.trunk_diameter}cm wide.")
+              f" a shade of {self.height}cm long "
+              f"and {self.trunk_diameter}cm wide.")
         self.stats.set_nbr_shades()
 
     def show(self):
@@ -133,8 +138,10 @@ class Tree(Plant):
 
         def display(self):
             print(f"[statistics for {self.name}]")
-            print(f"Stats: {self.get_nbr_grow()} grow, {self.get_nbr_age()} age, {self.get_nbr_show()} show")
+            print(f"Stats: {self.get_nbr_grow()} grow, "
+                  f"{self.get_nbr_age()} age, {self.get_nbr_show()} show")
             print(f"{self.get_nbr_shades()} shade")
+
 
 class Vegetable(Plant):
     def __init__(self, name, height, age, harvest_season, nutritional_value):
@@ -146,16 +153,18 @@ class Vegetable(Plant):
         super().show()
         print(f" Harvest season: {self.harvest_season}")
         print(f" Nutritional value: {self.nutritional_value}")
-    
+
     def grow(self):
         super().grow()
         self.nutritional_value += 1
-    
+
     def age(self):
         super().age()
 
+
 def display(plant):
     plant.stats.display()
+
 
 if __name__ == "__main__":
     print("=== Garden statistics ===")
@@ -167,7 +176,7 @@ if __name__ == "__main__":
     rose.show()
     rose.bloom(False)
     display(rose)
-    print(f"[asking the rose to grow and bloom]")
+    print("[asking the rose to grow and bloom]")
     rose.grow()
     rose.show()
     rose.bloom(True)
