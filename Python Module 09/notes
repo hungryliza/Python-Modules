@@ -1,0 +1,7 @@
+how to test with generator
+
+f = open("space_stations.json") 
+loaded = json.load(f) 
+for item in loaded: 
+  SpaceStation.model_validate(item) 
+  print(f"ID: {item['station_id']}")
